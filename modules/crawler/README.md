@@ -11,32 +11,28 @@
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
-# Terraform  module \aws\glue Terraform module
+# Terraform  module \<PROVIDER>-\<MODULE>\<NESTED_MODULE> Terraform module
 
-## Description
+\<Description>
 
-In this directory you can find the Terraform module for creating a Glue resources in AWS.
+This terraform module lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum ipsum lorem ipsum ipsum lorem ipsum.
 
-All code is found in the sub-modules and you should use the examples as a base to create your own configuration, note that most of the code is used for testing purposes and should be adapted to your needs when ran in Production.
-
-[Glue Catalog Module](./modules/catalog/README.md)
-
-Examples available [`here`](github.com/boldlink/terraform-aws-glue/tree/main/examples)
+Examples available [`here`]github.com/boldlink/<REPO_NAME>//tree/main/examples)
 
 ## Usage
 *NOTE*: These examples use the latest version of this module
 
 ```console
 module "miniumum" {
-  source  = "boldlink/glue/aws"
+  source  = "boldlink/<module_name>/<provider>//modules/<nested_name>"
   version = "x.x.x"
-  <insert the minimum required variables here if any are required>
+  # insert the minimum required variables here
   ...
 }
 ```
 ## Documentation
 
-[<ex. Amazon VPC/Github/Cloudflare> Documentation](https://link)
+[Amazon Documentation](https://link)
 
 [Terraform module documentation](https://link)
 
@@ -81,36 +77,5 @@ This repository uses third party software:
 * [tflint](https://github.com/terraform-linters/tflint) - Used to lint the Terraform code
   * Install with `brew install tflint`
   * Manually use via pre-commit
-
-### Supporting resources:
-
-The example stacks are used by BOLDLink developers to validate the modules by building an actual stack on AWS.
-
-Some of the modules have dependencies on other modules (ex. Ec2 instance depends on the VPC module) so we create them
-first and use data sources on the examples to use the stacks.
-
-Any supporting resources will be available on the `tests/supportingResources` and the lifecycle is managed by the `Makefile` targets.
-
-Resources on the `tests/supportingResources` folder are not intended for demo or actual implementation purposes, and can be used for reference.
-
-### Makefile
-The makefile contain in this repo is optimized for linux paths and the main purpose is to execute testing for now.
-* Create all tests stacks including any supporting resources:
-```console
-make tests
-```
-* Clean all tests *except* existing supporting resources:
-```console
-make clean
-```
-* Clean supporting resources - this is done separately so you can test your module build/modify/destroy independently.
-```console
-make cleansupporting
-```
-* !!!DANGER!!! Clean the state files from examples and test/supportingResources - use with CAUTION!!!
-```console
-make cleanstatefiles
-```
-
 
 #### BOLDLink-SIG 2022
