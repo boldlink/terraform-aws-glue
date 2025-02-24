@@ -65,18 +65,6 @@ resource "aws_glue_resource_policy" "this" {
 }
 
 
-
-output "catalog_database_names" {
-  description = "The names of the Glue catalog databases created."
-  value       = { for k, db in aws_glue_catalog_database.this : k => db.name }
-}
-
-output "glue_resource_policy_status" {
-  description = "ID of the Glue resource policy, if applied."
-  value       = aws_glue_resource_policy.this[*].id
-}
-
-
 variable "catalogs" {
   description = "Map of Glue catalog database configurations. Only the catalog name is required; all other fields are optional."
   type = map(object({
@@ -102,40 +90,3 @@ variable "catalogs" {
   }))
   default = {}
 }
-
-variable "enable_encryption" {
-  description = "Globally enable Glue Data Catalog encryption settings"
-  type        = bool
-  default     = false
-}
-
-variable "kms_key_arn" {
-  description = "The ARN of the KMS key to use for Glue encryption"
-  type        = string
-  default     = ""
-}
-
-variable "glue_encryption_role_arn" {
-  description = "The ARN of the IAM role for Glue catalog encryption service role (optional). Leave empty if not used."
-  type        = string
-  default     = ""
-}
-
-variable "return_connection_password_encrypted" {
-  description = "Override for returning connection passwords encrypted (defaults to true)"
-  type        = bool
-  default     = true
-}
-
-variable "enable_glue_resource_policy" {
-  description = "Globally enable applying a Glue resource policy"
-  type        = bool
-  default     = false
-}
-
-variable "glue_resource_policy" {
-  description = "A JSON string defining the Glue resource policy"
-  type        = string
-  default     = ""
-}
-

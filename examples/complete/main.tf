@@ -127,3 +127,90 @@ module "glue_catalogs_frankfurt" {
     }
   }
 }
+
+/*
+  Glue Crawlers with multiple sources
+*/
+
+module "role_ireland" {
+  source  = "boldlink/iam-role/aws"
+  version = "2.0.0"
+  # source = "./../../../terraform-aws-iam-role/"
+  providers = {
+    aws = aws.ireland
+  }
+  name               = "${var.name}-ireland"
+  assume_role_policy = data.aws_iam_policy_document.glue_assume_role_policy.json
+  tags               = merge({ Environment = "example" }, local.tags)
+  policies = {
+    "${var.name}-ireland-policy" = {
+      policy = data.aws_iam_policy_document.glue_role_policy.json
+      tags   = merge({ Environment = "example" }, local.tags)
+    }
+  }
+}
+
+module "glue_crawlers" {
+  source = "./../../modules/crawler"
+  providers = {
+    aws = aws.ireland
+  }
+  crawlers = {
+    # 1. Minimal crawler: only required fields.
+    minimal = {
+      name          = "${var.name}-ireland-catalog"
+      role          = module.role_ireland.arn
+      database_name = "${var.name}-1-ireland-catalog"
+      # Optional fields omitted; a default S3 target will be added automatically.
+      tags          = { Environment = "example" }
+    }
+    # 2. Crawler with an explicit S3 target and encryption via a security configuration.
+    s3_encrypted = {
+      name                   = "${var.name}-ireland-crawler"
+      role                   = module.role_ireland.arn
+      database_name          = "${var.name}-ireland-catalog"
+      description            = "${var.name}-ireland Crawler that scans an S3 bucket and uses encryption"
+      schedule               = "cron(15 12 * * ? *)"
+      security_configuration = "my-glue-security-config"  # This security configuration must already exist.
+      targets = {
+        s3_targets = [
+          {
+            path       = "s3://my-bucket/data/"
+            exclusions = ["**/tmp/*"]
+          }
+        ]
+        jdbc_targets        = []
+        dynamo_db_targets   = []
+        catalog_targets     = []
+      }
+      tags = { Environment = "Prod" }
+    }
+    # 3. Crawler with a catalog target.
+    catalog_source = {
+      name          = "catalog-source-crawler"
+      role          = "arn:aws:iam::123456789012:role/GlueCrawlerRole"
+      database_name = "my_catalog_database"
+      description   = "Crawler scanning the Glue Catalog"
+      targets = {
+        s3_targets        = []   # No S3 target provided.
+        jdbc_targets      = []
+        dynamo_db_targets = []
+        catalog_targets   = [
+          {
+            database_name = "source_database"
+            table_name    = "source_table"
+          }
+        ]
+      }
+      tags = { Environment = "Test" }
+    }
+  }
+}
+
+output "crawler_names" {
+  value = module.glue_crawlers.crawler_names
+}
+
+output "crawler_ids" {
+  value = module.glue_crawlers.crawler_ids
+}
