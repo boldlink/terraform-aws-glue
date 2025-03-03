@@ -1,35 +1,25 @@
-variable "enable_encryption" {
-  description = "Globally enable Glue Data Catalog encryption settings"
-  type        = bool
-  default     = false
-}
-
-variable "kms_key_arn" {
-  description = "The ARN of the KMS key to use for Glue encryption"
-  type        = string
-  default     = ""
-}
-
-variable "glue_encryption_role_arn" {
-  description = "The ARN of the IAM role for Glue catalog encryption service role (optional). Leave empty if not used."
-  type        = string
-  default     = ""
-}
-
-variable "return_connection_password_encrypted" {
-  description = "Override for returning connection passwords encrypted (defaults to true)"
-  type        = bool
-  default     = true
-}
-
-variable "enable_glue_resource_policy" {
-  description = "Globally enable applying a Glue resource policy"
-  type        = bool
-  default     = false
-}
-
-variable "glue_resource_policy" {
-  description = "A JSON string defining the Glue resource policy"
-  type        = string
-  default     = ""
+variable "catalogs" {
+  description = "Map of Glue catalog database configurations. Only the catalog name is required; all other fields are optional."
+  type = map(object({
+    name        = string
+    description = optional(string, "")
+    parameters  = optional(map(string), {})
+    federated_database = optional(object({
+      connection_name = string
+      identifier      = string
+    }), null)
+    target_database = optional(object({
+      catalog_id    = string
+      database_name = string
+      region        = string
+    }), null)
+    create_table_default_permission = optional(object({
+      permissions = list(string)
+      principal = object({
+        data_lake_principal_identifier = string
+      })
+    }), null)
+    tags = optional(map(string), {})
+  }))
+  default = {}
 }

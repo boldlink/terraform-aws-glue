@@ -11,26 +11,38 @@
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
-# Terraform  module \<PROVIDER>-\<MODULE>\<NESTED_MODULE> Terraform module
+<h1> Terraform  module \aws\glue\crawler Terraform module </h1>
 
 \<Description>
 
-This terraform module lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum ipsum lorem ipsum ipsum lorem ipsum.
+This is a AWS Glue terraform module and it will allow you to create a Glue Crawler.
 
-Examples available [`here`]github.com/boldlink/<REPO_NAME>//tree/main/examples)
+A Glue Crawler connects to one (or more) data store(s), progresses through a prioritized list of classifiers to determine the schema for your data, and then creates metadata tables in the target Data Catalog.
 
-## Usage
+* Create many crawlers with different configurations using a single module (only s3 target is tested & supported at this time).
+* Create a single crawler with multiple target configurations using a single module (not tested yet).
+
+Examples available [`here`]github.com/boldlink/terraform-aws-glue//tree/main/examples)
+
+<h2> Usage </h2>
 *NOTE*: These examples use the latest version of this module
 
 ```console
 module "miniumum" {
-  source  = "boldlink/<module_name>/<provider>//modules/<nested_name>"
+  source  = "boldlink/glue/aws//modules/crawler"
   version = "x.x.x"
-  # insert the minimum required variables here
+  crawlers = {
+    "${var.name}-minimal" = {
+      name          = "${var.name}-minimal"
+      role          = module.role.arn
+      database_name = var.name
+    }
+  }
   ...
 }
 ```
-## Documentation
+
+<h2> Documentation </h2>
 
 [Amazon Documentation](https://link)
 
@@ -65,7 +77,7 @@ No inputs.
 No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-## Third party software
+<h2> Third party software </h2>
 This repository uses third party software:
 * [pre-commit](https://pre-commit.com/) - Used to help ensure code and documentation consistency
   * Install with `brew install pre-commit`
@@ -78,4 +90,4 @@ This repository uses third party software:
   * Install with `brew install tflint`
   * Manually use via pre-commit
 
-#### BOLDLink-SIG 2022
+<h4> BOLDLink-SIG 2025 </h4>

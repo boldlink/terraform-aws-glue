@@ -22,7 +22,6 @@ module "role" {
 
 module "glue_crawlers" {
   source = "./../../modules/crawler"
-
   crawlers = {
     "${var.name}-minimal" = {
       name          = "${var.name}-minimal"
@@ -32,20 +31,6 @@ module "glue_crawlers" {
   }
 }
 
-output "crawler_names" {
-  value = module.glue_crawlers.crawler_names
-}
-
-output "crawler_ids" {
-  value = module.glue_crawlers.crawler_ids
-}
-
-output "data_catalog_names" {
-  description = "The names of the Glue catalog databases created."
-  value       = module.glue_catalog_minimal.data_catalog_names
-}
-
-output "data_catalog_policy_status" {
-  description = "ID of the Glue resource policy, if applied."
-  value       = module.glue_catalog_minimal.data_catalog_policy_status
+module "glue_global_security_settings" {
+  source = "./../../modules/global"
 }

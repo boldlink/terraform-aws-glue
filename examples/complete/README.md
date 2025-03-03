@@ -11,13 +11,22 @@
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
-# Terraform  module example of complete and most common configuration
+# Terraform AWS Glue Complete module example:
 
-This example only creates three catalogs in three different regions with complete configuration.
+* Building resources in different regions so we can test different global glue settings (Glue Catalog Encryption; Glue Security Settings; Glue Resource Policy).
+* IAM roles in ireland and london for global settings.
+* Kms keys in ireland and london for global settings.
+* Glue catalogs in ireland and london.
+* Crawlers in ireland and london
+* S3 bucket for the `s3_target` crawler configuration
 
-These three examples test unencrypted; SSE-KMS and SSE-KMS-WITH-SERVICE-ROLE region global encryption catalog settings.
+**Note :** this module has a considerable amount of commented out code, this is code we have not tested and cannot guarantee it will work as expected. We have left it in the module for reference purposes for further development.
 
-In order to do this we are using three different AWS regions (`Ireland`; `London`; `Frankfurt`) since the encryption is set on a region to region basis.
+<h2> Unsupported/Untested examples at this time </h2>
+
+* DDB
+* JDBC
+* S3 Target
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -61,4 +70,4 @@ This repository uses third party software:
   * Install with `brew install tflint`
   * Manually use via pre-commit
 
-#### BOLDLink-SIG 2022
+<h4> BOLDLink-SIG 2025 </h4>

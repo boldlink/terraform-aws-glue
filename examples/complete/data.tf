@@ -1,5 +1,9 @@
-data "aws_region" "current" {
+data "aws_region" "london" {
   provider = aws.london
+}
+
+data "aws_region" "ireland" {
+  provider = aws.ireland
 }
 
 data "aws_partition" "current" {
@@ -13,19 +17,17 @@ data "aws_caller_identity" "current" {
 data "aws_iam_policy_document" "glue_assume_role_policy" {
   statement {
     effect = "Allow"
-
     principals {
       type        = "Service"
       identifiers = ["glue.${local.dns_suffix}"]
     }
-
-    actions = [
-      "sts:AssumeRole"
-    ]
+    actions = ["sts:AssumeRole"]
   }
 }
 
-data "aws_iam_policy_document" "glue_role_policy" {
+# checkov:skip=CKV_AWS_111: Reason - this configuration is intentionally for testing only and not production ready
+# checkov:skip=CKV_AWS_356: Reason - this configuration is intentionally for testing only and not production ready
+data "aws_iam_policy_document" "glue_catalog_role_policy" {
   statement {
     sid = "AllowKMSOperations"
     actions = [
@@ -38,7 +40,8 @@ data "aws_iam_policy_document" "glue_role_policy" {
   }
 }
 
-data "aws_iam_policy_document" "glue_resource_policy" {
+data "aws_iam_policy_document" "glue_resource_policy_london" {
+  provider = aws.london
   statement {
     sid    = "AllowReadWriteIfProjectTagMatches"
     effect = "Allow"
@@ -57,9 +60,9 @@ data "aws_iam_policy_document" "glue_resource_policy" {
       "glue:DeleteDatabase",
       "glue:CreateTable",
       "glue:UpdateTable",
-      "glue:DeleteTable"
+      "glue:DeleteTable",
     ]
-    resources = ["arn:${local.partition}:glue:${local.region}:${local.account_id}:*:*"]
+    resources = ["arn:${local.partition}:glue:${local.london_region}:${local.account_id}:*:*"]
 
     condition {
       test     = "StringEquals"
@@ -68,3 +71,48 @@ data "aws_iam_policy_document" "glue_resource_policy" {
     }
   }
 }
+
+
+data "aws_iam_policy_document" "ireland_glue_crawler_policy_doc" {
+  provider = aws.ireland
+  statement {
+    sid = "GlueCrawlerActions"
+    actions = [
+      "glue:GetDatabase",
+      "glue:GetDatabases",
+      "glue:GetTable",
+      "glue:GetTables",
+      "glue:GetPartition",
+      "glue:GetPartitions",
+      "glue:CreateTable",
+      "glue:UpdateTable",
+      "glue:DeleteTable",
+      "glue:GetSecurityConfiguration"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid = "S3AccessForCrawler"
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject"
+    ]
+    resources = [
+      "arn:aws:s3:::my-glue-crawler-bucket",
+      "arn:aws:s3:::my-glue-crawler-bucket/*"
+    ]
+  }
+  statement {
+    sid = "AllowKMSOperations"
+    actions = [
+      "kms:Decrypt",
+      "kms:Encrypt",
+      "kms:GenerateDataKey*",
+      "kms:DescribeKey"
+    ]
+    resources = ["*"]
+  }
+}
+
