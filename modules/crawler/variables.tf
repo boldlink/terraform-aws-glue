@@ -4,15 +4,15 @@ variable "crawlers" {
     name                   = string
     role                   = string
     database_name          = string
-    description            = optional(string, "")
-    schedule               = optional(string, "") # e.g., cron(15 12 * * ? *)
-    classifiers            = optional(list(string), [])
+    description            = ""
+    schedule               = "" # e.g., cron(15 12 * * ? *)
+    classifiers            = []
     recrawl_policy         = optional(object({ recrawl_behavior = string }), null)
-    configuration          = optional(string, "") # JSON configuration string
-    security_configuration = optional(string, "")
+    configuration          = "" # JSON configuration string
+    security_configuration = ""
     schema_change_policy = optional(object({
-      delete_behavior = optional(string, "LOG")                # Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE
-      update_behavior = optional(string, "UPDATE_IN_DATABASE") # Valid values: LOG or UPDATE_IN_DATABASE
+      delete_behavior = "LOG" # Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE
+      update_behavior = "UPDATE_IN_DATABASE" # Valid values: LOG or UPDATE_IN_DATABASE
       }), {
       delete_behavior = "LOG"
       update_behavior = "UPDATE_IN_DATABASE"
@@ -32,7 +32,7 @@ variable "crawlers" {
       })), [])
       catalog_targets = optional(list(object({
         database_name = string
-        table_name    = optional(string, "")
+        table_name    = ""
       })), [])
       }), {
       s3_targets        = []
@@ -40,7 +40,7 @@ variable "crawlers" {
       dynamo_db_targets = []
       catalog_targets   = []
     })
-    tags = optional(map(string), {})
+    tags = {}
   }))
   default = {}
 }
