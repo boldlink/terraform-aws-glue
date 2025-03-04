@@ -2,7 +2,7 @@ variable "catalogs" {
   description = "Map of Glue catalog database configurations. Only the catalog name is required; all other fields are optional."
   type = map(object({
     name        = string
-    description = optional(string, "")
+    description = optional(string)
     parameters  = optional(map(string), {})
     federated_database = optional(object({
       connection_name = string
