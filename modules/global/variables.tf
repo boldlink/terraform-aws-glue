@@ -61,16 +61,16 @@ variable "glue_security_configurations" {
     name = string
     encryption_configuration = object({
       cloudwatch_encryption = object({
-        cloudwatch_encryption_mode = "DISABLED"
-        kms_key_arn        = ""
+        cloudwatch_encryption_mode = optional(string?, "DISABLED")
+        kms_key_arn        = optional(string?, null)
       })
       job_bookmarks_encryption = object({
-        job_bookmarks_encryption_mode = "DISABLED"
-        kms_key_arn        = ""
+        job_bookmarks_encryption_mode = optional(string?, "DISABLED")
+        kms_key_arn        = optional(string?, null)
       })
       s3_encryption = object({
-        s3_encryption_mode = "DISABLED"
-        kms_key_arn        = ""
+        s3_encryption_mode = optional(string?, "DISABLED")
+        kms_key_arn        = optional(string?, null)
       })
     })
   }))
