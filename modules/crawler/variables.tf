@@ -9,7 +9,7 @@ variable "crawlers" {
     classifiers            = optional(list(string))
     recrawl_policy         = optional(object({ recrawl_behavior = string }))
     configuration          = optional(string) # JSON configuration string
-    security_configuration = optional(string?)
+    security_configuration = optional(string)
     schema_change_policy = optional(object({
       delete_behavior = optional(string)                # Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE
       update_behavior = optional(string) # Valid values: LOG or UPDATE_IN_DATABASE
