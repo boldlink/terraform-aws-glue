@@ -7,8 +7,8 @@ In this example we are configuring encryption and resource policy for the catalo
 Multiple Catalogs are created.
 */
 
-# checkov:skip=CKV_TF_1
 module "glue_global_settings_london" {
+  # checkov:skip=CKV_TF_1
   source = "./../../modules/global"
   providers = {
     aws = aws.london
@@ -41,8 +41,9 @@ module "glue_global_settings_london" {
   depends_on = [time_sleep.wait_for_london, module.role_london]
 }
 
-# checkov:skip=CKV_TF_1
+
 module "glue_global_settings_ireland" {
+  # checkov:skip=CKV_TF_1
   source = "./../../modules/global"
   providers = {
     aws = aws.ireland

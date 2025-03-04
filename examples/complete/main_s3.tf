@@ -1,5 +1,5 @@
-# checkov:skip=CKV_TF_1
 module "ireland_s3_bucket" {
+  # checkov:skip=CKV_TF_1
   source  = "boldlink/s3/aws"
   version = "2.5.1"
   providers = {

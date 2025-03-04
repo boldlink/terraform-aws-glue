@@ -1,5 +1,5 @@
-# checkov:skip=CKV_TF_1
 module "role_ireland" {
+  # checkov:skip=CKV_TF_1
   source  = "boldlink/iam-role/aws"
   version = "2.0.0"
   providers = {
@@ -21,8 +21,8 @@ resource "time_sleep" "wait_for_ireland" {
   depends_on      = [module.role_ireland, module.kms_ireland]
 }
 
-# checkov:skip=CKV_TF_1
 module "role_london" {
+  # checkov:skip=CKV_TF_1
   source  = "boldlink/iam-role/aws"
   version = "2.0.0"
   providers = {

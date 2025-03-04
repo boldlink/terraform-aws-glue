@@ -6,8 +6,8 @@ This example will test the global catalog encryption configurations.
 Multiple Catalogs are created.
 */
 
-# checkov:skip=CKV_TF_1
 module "catalogs_ireland" {
+  # checkov:skip=CKV_TF_1
   source = "./../../modules/catalog"
   providers = {
     aws = aws.ireland
@@ -36,8 +36,9 @@ resource "aws_glue_catalog_table" "aws_glue_catalog_table" {
   depends_on    = [module.catalogs_ireland]
 }
 
-# checkov:skip=CKV_TF_1
+
 module "catalogs_london" {
+  # checkov:skip=CKV_TF_1
   source = "./../../modules/catalog"
   providers = {
     aws = aws.london

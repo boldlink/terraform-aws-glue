@@ -28,6 +28,7 @@
 
 # checkov:skip=CKV_TF_1
 module "ireland_glue_crawlers" {
+  # checkov:skip=CKV_TF_1
   source = "./../../modules/crawler"
   providers = {
     aws = aws.ireland

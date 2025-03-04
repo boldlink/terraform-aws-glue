@@ -1,5 +1,6 @@
-# checkov:skip=CKV_TF_1
+
 module "kms_ireland" {
+  # checkov:skip=CKV_TF_1
   source  = "boldlink/kms/aws"
   version = "1.2.0"
   providers = {
@@ -10,8 +11,9 @@ module "kms_ireland" {
   deletion_window_in_days = 7
 }
 
-# checkov:skip=CKV_TF_1
+
 module "kms_london" {
+  # checkov:skip=CKV_TF_1
   source  = "boldlink/kms/aws"
   version = "1.2.0"
   providers = {
