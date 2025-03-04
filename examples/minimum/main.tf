@@ -31,6 +31,6 @@ module "glue_crawlers" {
   }
 }
 
-module "glue_global_security_settings" {
-  source = "./../../modules/global"
-}
+# module "glue_global_security_settings" {
+#   source = "./../../modules/global"
+# }
