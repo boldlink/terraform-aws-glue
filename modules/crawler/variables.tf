@@ -11,7 +11,7 @@ variable "crawlers" {
     configuration          = optional(string) # JSON configuration string
     security_configuration = optional(string)
     schema_change_policy = optional(object({
-      delete_behavior = optional(string)                # Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE
+      delete_behavior = optional(string) # Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE
       update_behavior = optional(string) # Valid values: LOG or UPDATE_IN_DATABASE
       }), {
       delete_behavior = "LOG"
