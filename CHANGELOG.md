@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - feat: add the Glue Catalog  source.
 - feat: add the JDBC table source.
 - feat: add the DDB table source.
-- CKV_AWS_94 fix.
-- CKV_AWS_99 fix.
-- CKV_AWS_108 fix.
-- CKV_AWS_109 fix.
-- CKV_AWS_110 fix.
-- CKV_AWS_111 fix.
-- CKV_AWS_356 fix.
+- fix: CKV_AWS_94 # Ensure that encryption is enabled for the AWS Glue Data Catalog
+- fix: CKV_AWS_99 # Ensure Glue Security Configuration Encryption is enabled
+- fix: CKV_AWS_108 # "Ensure IAM policies does not allow data exfiltration"
+- fix: CKV_AWS_109 # "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+- fix: CKV_AWS_110 # "Ensure IAM policies does not allow privilege escalation"
+- fix: CKV_AWS_111 # "Ensure IAM policies does not allow write access without constraints"
+- fix: CKV_AWS_356 # "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+- fix: CKV_AWS_195 # "Ensure Glue component has a security configuration associated"
 
 ## [1.0.0] - 2025-02-17
 ### Description

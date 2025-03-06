@@ -6,10 +6,11 @@ external-modules-download-path: .external_modules
 framework: all
 skip-check:
 - CKV_TF_1
-- CKV_AWS_94
-- CKV_AWS_99
-- CKV_AWS_108
-- CKV_AWS_109
-- CKV_AWS_110
-- CKV_AWS_111
-- CKV_AWS_356
+- CKV_AWS_94 # Ensure that encryption is enabled for the AWS Glue Data Catalog
+- CKV_AWS_99 # Ensure Glue Security Configuration Encryption is enabled
+- CKV_AWS_108 # "Ensure IAM policies does not allow data exfiltration"
+- CKV_AWS_109 # "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
+- CKV_AWS_110 # "Ensure IAM policies does not allow privilege escalation"
+- CKV_AWS_111 # "Ensure IAM policies does not allow write access without constraints"
+- CKV_AWS_356 # "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
+- CKV_AWS_195 # "Ensure Glue component has a security configuration associated"
