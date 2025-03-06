@@ -16,17 +16,9 @@
 * Building resources in different regions so we can test different global glue settings (Glue Catalog Encryption; Glue Security Settings; Glue Resource Policy).
 * IAM roles in ireland and london for global settings.
 * Kms keys in ireland and london for global settings.
-* Glue catalogs in ireland and london.
-* Crawlers in ireland and london
+* Glue catalogs in Ireland London.
+* Crawlers in ireland and london using s3 Target.
 * S3 bucket for the `s3_target` crawler configuration
-
-**Note :** this module has a considerable amount of commented out code, this is code we have not tested and cannot guarantee it will work as expected. We have left it in the module for reference purposes for further development.
-
-<h2> Unsupported/Untested examples at this time </h2>
-
-* DDB
-* JDBC
-* S3 Target
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

@@ -15,12 +15,9 @@
 
 \<Description>
 
-This is a AWS Glue terraform module and it will allow you to create a Glue Crawler.
+This module creates a Glue Crawler on s3_target.
 
 A Glue Crawler connects to one (or more) data store(s), progresses through a prioritized list of classifiers to determine the schema for your data, and then creates metadata tables in the target Data Catalog.
-
-* Create many crawlers with different configurations using a single module (only s3 target is tested & supported at this time).
-* Create a single crawler with multiple target configurations using a single module (not tested yet).
 
 Examples available [`here`]github.com/boldlink/terraform-aws-glue//tree/main/examples)
 
@@ -28,17 +25,17 @@ Examples available [`here`]github.com/boldlink/terraform-aws-glue//tree/main/exa
 *NOTE*: These examples use the latest version of this module
 
 ```console
-module "miniumum" {
+module "example" {
   source  = "boldlink/glue/aws//modules/crawler"
   version = "x.x.x"
-  crawlers = {
-    "${var.name}-minimal" = {
-      name          = "${var.name}-minimal"
-      role          = module.role.arn
-      database_name = var.name
-    }
-  }
+  source                = "./../../modules/crawler"
+  name                  = var.name
+  role                  = module.role.arn
+  database_name         = var.name
+  s3_target_path        = "s3://bucket/data/"
   ...
+  tags                  = { Environment = "example" }
+  }
 }
 ```
 

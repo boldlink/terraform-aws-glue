@@ -32,7 +32,9 @@ module "miniumum" {
       name = "catalog_example"
       description = "catalog example "
       database_name = "catalog_example_db"
+      ...
     }
+    ...
   }
   ...
 }

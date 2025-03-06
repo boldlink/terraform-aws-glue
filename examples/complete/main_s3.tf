@@ -5,6 +5,6 @@ module "ireland_s3_bucket" {
   providers = {
     aws = aws.ireland
   }
-  bucket = "${var.name}-${local.ireland_region}"
+  bucket = "${var.name}-complete-${local.account_id}-ireland"
   tags   = merge({ "Name" = "${var.name}-${local.ireland_region}" }, local.tags)
 }

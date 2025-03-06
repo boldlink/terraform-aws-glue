@@ -13,6 +13,9 @@
 
 # Terraform module example of minimum configuration
 
+* S3 bucket for the `s3_target` crawler configuration
+* Role for the crawler to use.
+* Glue catalog.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

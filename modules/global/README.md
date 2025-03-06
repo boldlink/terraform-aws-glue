@@ -30,8 +30,8 @@ Examples available [`here`](github.com/boldlink/terraform-aws-glue/tree/main/exa
 *NOTE*: These examples use the latest version of this module
 
 ```console
-module "miniumum" {
-  source  = "boldlink/glue/aws//modules/catalog"
+module "example" {
+  source  = "boldlink/glue/aws//modules/global"
   version = "x.x.x"
   enable_glue_encryption = true
   enable_glue_resource_policy = true

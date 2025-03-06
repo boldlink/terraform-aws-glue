@@ -41,7 +41,6 @@ module "glue_global_settings_london" {
   depends_on = [time_sleep.wait_for_london, module.role_london]
 }
 
-
 module "glue_global_settings_ireland" {
   # checkov:skip=CKV_TF_1
   source = "./../../modules/global"

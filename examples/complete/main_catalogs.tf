@@ -5,7 +5,6 @@ This example will test the global catalog encryption configurations.
 
 Multiple Catalogs are created.
 */
-
 module "catalogs_ireland" {
   # checkov:skip=CKV_TF_1
   source = "./../../modules/catalog"
