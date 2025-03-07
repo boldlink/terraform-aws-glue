@@ -30,6 +30,6 @@ output "glue_resource_policy_london" {
 }
 
 output "glue_encryption_settings" {
-  value = module.glue_global_settings_london.glue_encryption_settings
+  value       = module.glue_global_settings_london.glue_encryption_settings
   description = "The ID of the Glue Data Catalog encryption settings"
 }

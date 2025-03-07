@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "glue_crawler_trust" {
 }
 
 /*
-Note this policy is for example and testing purposes only. Please ensure you follow the 
+Note this policy is for example and testing purposes only. Please ensure you follow the
 principle of least privilege when implementing your crawler in Production.
 */
 data "aws_iam_policy_document" "glue_crawler_policy" {
@@ -30,8 +30,8 @@ data "aws_iam_policy_document" "glue_crawler_policy" {
     resources = ["*"]
   }
   statement {
-    sid    = "GlueActions"
-    effect = "Allow"
+    sid       = "GlueActions"
+    effect    = "Allow"
     actions   = ["glue:*"]
     resources = ["*"]
   }

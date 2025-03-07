@@ -60,7 +60,9 @@ module "example" {
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.90.0 |
 
 ## Modules
 
@@ -68,15 +70,31 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_glue_data_catalog_encryption_settings.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_catalog_encryption_settings) | resource |
+| [aws_glue_resource_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_resource_policy) | resource |
+| [aws_glue_security_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_security_configuration) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_enable_encryption"></a> [enable\_encryption](#input\_enable\_encryption) | Globally enable Glue Data Catalog encryption settings | `bool` | `false` | no |
+| <a name="input_enable_glue_resource_policy"></a> [enable\_glue\_resource\_policy](#input\_enable\_glue\_resource\_policy) | Globally enable applying a Glue resource policy | `bool` | `false` | no |
+| <a name="input_enable_glue_security_configuration"></a> [enable\_glue\_security\_configuration](#input\_enable\_glue\_security\_configuration) | Flag to enable or disable Glue security configurations | `bool` | `false` | no |
+| <a name="input_glue_encryption_role_arn"></a> [glue\_encryption\_role\_arn](#input\_glue\_encryption\_role\_arn) | The ARN of the IAM role for Glue catalog encryption service role (optional). Leave empty if not used. | `string` | `""` | no |
+| <a name="input_glue_resource_policy"></a> [glue\_resource\_policy](#input\_glue\_resource\_policy) | A JSON string defining the Glue resource policy | `string` | `""` | no |
+| <a name="input_glue_security_configurations"></a> [glue\_security\_configurations](#input\_glue\_security\_configurations) | List of Glue security configurations | <pre>list(object({<br>    name = string<br>    encryption_configuration = object({<br>      cloudwatch_encryption = object({<br>        cloudwatch_encryption_mode = string<br>        kms_key_arn                = string<br>      })<br>      job_bookmarks_encryption = object({<br>        job_bookmarks_encryption_mode = string<br>        kms_key_arn                   = string<br>      })<br>      s3_encryption = object({<br>        s3_encryption_mode = string<br>        kms_key_arn        = string<br>      })<br>    })<br>  }))</pre> | `[]` | no |
+| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The ARN of the KMS key to use for Glue encryption | `string` | `""` | no |
+| <a name="input_return_connection_password_encrypted"></a> [return\_connection\_password\_encrypted](#input\_return\_connection\_password\_encrypted) | Override for returning connection passwords encrypted (defaults to true) | `bool` | `true` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_glue_encryption_settings"></a> [glue\_encryption\_settings](#output\_glue\_encryption\_settings) | The ID of the Glue Data Catalog encryption settings |
+| <a name="output_glue_resource_policy"></a> [glue\_resource\_policy](#output\_glue\_resource\_policy) | The Glue resource policy |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Third party software

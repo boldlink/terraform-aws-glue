@@ -12,9 +12,9 @@ module "catalog_ireland_1" {
     aws = aws.ireland
   }
   source      = "./../../modules/catalog_database"
-  name        ="${var.name}-1-catalog"
+  name        = "${var.name}-1-catalog"
   description = "${var.name}-1-catalog catalog database"
-  parameters = { Env = "example"}
+  parameters  = { Env = "example" }
   # federated_database = [
   #   {
   #     connection_name = "my-connection"
@@ -46,10 +46,10 @@ module "catalog_ireland_2" {
     aws = aws.ireland
   }
   source      = "./../../modules/catalog_database"
-  name        ="${var.name}-2-catalog"
+  name        = "${var.name}-2-catalog"
   description = "${var.name}-2-catalog catalog database"
-  parameters = { Env = "example"}
-  tags = { Environment = "example" }
+  parameters  = { Env = "example" }
+  tags        = { Environment = "example" }
 }
 
 
@@ -68,8 +68,8 @@ module "catalog_london_1" {
   source      = "./../../modules/catalog_database"
   name        = "${var.name}-1-london-catalog"
   description = "${var.name}-1-london catalog database"
-  parameters = { Env = "example"}
-  tags = { Environment = "example" }
+  parameters  = { Env = "example" }
+  tags        = { Environment = "example" }
 }
 
 module "catalog_london_2" {
@@ -80,13 +80,13 @@ module "catalog_london_2" {
   source      = "./../../modules/catalog_database"
   name        = "${var.name}-2-london-catalog"
   description = "${var.name}-2-london catalog database"
-  parameters = { Env = "example"}
-  tags = { Environment = "example" }
+  parameters  = { Env = "example" }
+  tags        = { Environment = "example" }
 }
 
 resource "aws_glue_classifier" "example" {
   provider = aws.ireland
-  name = "${var.name}-ireland"
+  name     = "${var.name}-ireland"
   csv_classifier {
     allow_single_column    = false
     contains_header        = "PRESENT"
@@ -102,32 +102,32 @@ module "crawler" {
   providers = {
     aws = aws.ireland
   }
-  source                = "./../../modules/crawler"
-  name                  = var.name
-  role                  = module.role_ireland.arn
-  database_name         = "${var.name}-1-catalog"
-  s3_target_path        = "s3://${var.name}-complete-${local.account_id}-ireland/data/"
-  s3_target_exclusions  = ["**/tmp/**"]
-  description           = "Crawler to scan my S3 bucket"
-  table_prefix          = "my_prefix_"
-  update_behavior       = "UPDATE_IN_DATABASE"
-  delete_behavior       = "LOG"
-  schedule              = "cron(0 12 * * ? *)"
-  recrawl_policy        = "CRAWL_EVERYTHING"
+  source                   = "./../../modules/crawler"
+  name                     = var.name
+  role                     = module.role_ireland.arn
+  database_name            = "${var.name}-1-catalog"
+  s3_target_path           = "s3://${var.name}-complete-${local.account_id}-ireland/data/"
+  s3_target_exclusions     = ["**/tmp/**"]
+  description              = "Crawler to scan my S3 bucket"
+  table_prefix             = "my_prefix_"
+  update_behavior          = "UPDATE_IN_DATABASE"
+  delete_behavior          = "LOG"
+  schedule                 = "cron(0 12 * * ? *)"
+  recrawl_policy           = "CRAWL_EVERYTHING"
   crawler_lineage_settings = "ENABLE"
-  configuration         = jsonencode({
+  configuration = jsonencode({
     "Version" : 1.0,
     "CrawlerOutput" : {
       "Partitions" : { "AddOrUpdateBehavior" : "InheritFromTable" }
     }
   })
-  classifiers           = ["${var.name}-ireland"]
-  tags                  = { Environment = "example" }
-  depends_on            = [
-    module.catalog_ireland_1, 
-    module.ireland_s3_bucket, 
-    module.role_ireland, 
-    time_sleep.wait_for_ireland 
+  classifiers = ["${var.name}-ireland"]
+  tags        = { Environment = "example" }
+  depends_on = [
+    module.catalog_ireland_1,
+    module.ireland_s3_bucket,
+    module.role_ireland,
+    time_sleep.wait_for_ireland
   ]
 }
 

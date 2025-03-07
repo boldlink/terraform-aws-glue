@@ -115,4 +115,3 @@ data "aws_iam_policy_document" "ireland_glue_crawler_policy_doc" {
     resources = ["*"]
   }
 }
-

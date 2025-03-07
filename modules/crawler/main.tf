@@ -2,9 +2,9 @@ resource "aws_glue_crawler" "this" {
   name          = var.name
   role          = var.role
   database_name = var.database_name
-  description  = var.description != "" ? var.description : null
-  schedule   = var.schedule != null ? var.schedule : null
-  table_prefix = var.table_prefix != "" ? var.table_prefix : null
+  description   = var.description != "" ? var.description : null
+  schedule      = var.schedule != null ? var.schedule : null
+  table_prefix  = var.table_prefix != "" ? var.table_prefix : null
   s3_target {
     path       = var.s3_target_path
     exclusions = var.s3_target_exclusions
@@ -26,6 +26,6 @@ resource "aws_glue_crawler" "this" {
     }
   }
   configuration = var.configuration != "" ? var.configuration : null
-  classifiers = var.classifiers
-  tags = var.tags
+  classifiers   = var.classifiers
+  tags          = var.tags
 }

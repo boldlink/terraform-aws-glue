@@ -55,7 +55,9 @@ module "miniumum" {
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.90.0 |
 
 ## Modules
 
@@ -63,15 +65,28 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_glue_catalog_database.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_database) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_create_table_default_permission"></a> [create\_table\_default\_permission](#input\_create\_table\_default\_permission) | A list of objects defining default table creation permissions. Each object must include a list of permissions and a principal list. | <pre>list(object({<br>    permissions = list(string)<br>    principal = list(object({<br>      data_lake_principal_identifier = string<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_description"></a> [description](#input\_description) | The catalog description. Note: If you supply a federated\_database configuration, AWS Glue requires description to be null. | `string` | n/a | yes |
+| <a name="input_federated_database"></a> [federated\_database](#input\_federated\_database) | A list of federated database objects. Each object must include connection\_name and identifier. | <pre>list(object({<br>    connection_name = string<br>    identifier      = string<br>  }))</pre> | `[]` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Glue catalog database. | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | A map of additional parameters for the catalog database. | `map(string)` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the catalog database. | `map(string)` | `{}` | no |
+| <a name="input_target_database"></a> [target\_database](#input\_target\_database) | A list of target database objects. Each object must include catalog\_id, database\_name, and region. | <pre>list(object({<br>    catalog_id    = string<br>    database_name = string<br>    region        = string<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARNs of the Glue catalog databases created. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the created Glue catalog database. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Third party software
