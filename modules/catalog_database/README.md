@@ -11,15 +11,12 @@
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
-# Terraform  module \aws\glue Terraform module
+# Terraform  module boldlink\aws\glue\catalog Terraform module
 
-## Description
+<h2> Description </h3>
 
-In this directory you can find the Terraform module for creating a Glue resources in AWS.
-
-All code is found in the sub-modules and you should use the examples as a base to create your own configuration, note that most of the code is used for testing purposes and should be adapted to your needs when ran in Production.
-
-[Glue Catalog Module](./modules/catalog/README.md)
+This terraform creates the AWS Glue Catalog and allows you to:
+* Create multiple Glue Data Catalog Databases.
 
 Examples available [`here`](github.com/boldlink/terraform-aws-glue/tree/main/examples)
 
@@ -28,15 +25,15 @@ Examples available [`here`](github.com/boldlink/terraform-aws-glue/tree/main/exa
 
 ```console
 module "miniumum" {
-  source  = "boldlink/glue/aws"
+  source  = "boldlink/glue/aws//modules/catalog"
   version = "x.x.x"
-  <insert the minimum required variables here if any are required>
-  ...
+  name        = "example"
+  description = "example catalog"
 }
 ```
 ## Documentation
 
-[<ex. Amazon VPC/Github/Cloudflare> Documentation](https://link)
+[Amazon Documentation](https://link)
 
 [Terraform module documentation](https://link)
 
@@ -50,7 +47,9 @@ module "miniumum" {
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.90.0 |
 
 ## Modules
 
@@ -58,15 +57,28 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_glue_catalog_database.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_database) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_create_table_default_permission"></a> [create\_table\_default\_permission](#input\_create\_table\_default\_permission) | A list of objects defining default table creation permissions. Each object must include a list of permissions and a principal list. | <pre>list(object({<br>    permissions = list(string)<br>    principal = list(object({<br>      data_lake_principal_identifier = string<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_description"></a> [description](#input\_description) | The catalog description. Note: If you supply a federated\_database configuration, AWS Glue requires description to be null. | `string` | n/a | yes |
+| <a name="input_federated_database"></a> [federated\_database](#input\_federated\_database) | A list of federated database objects. Each object must include connection\_name and identifier. | <pre>list(object({<br>    connection_name = string<br>    identifier      = string<br>  }))</pre> | `[]` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Glue catalog database. | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | A map of additional parameters for the catalog database. | `map(string)` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the catalog database. | `map(string)` | `{}` | no |
+| <a name="input_target_database"></a> [target\_database](#input\_target\_database) | A list of target database objects. Each object must include catalog\_id, database\_name, and region. | <pre>list(object({<br>    catalog_id    = string<br>    database_name = string<br>    region        = string<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARNs of the Glue catalog databases created. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the created Glue catalog database. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Third party software
@@ -81,35 +93,5 @@ This repository uses third party software:
 * [tflint](https://github.com/terraform-linters/tflint) - Used to lint the Terraform code
   * Install with `brew install tflint`
   * Manually use via pre-commit
-
-### Supporting resources:
-
-The example stacks are used by BOLDLink developers to validate the modules by building an actual stack on AWS.
-
-Some of the modules have dependencies on other modules (ex. Ec2 instance depends on the VPC module) so we create them
-first and use data sources on the examples to use the stacks.
-
-Any supporting resources will be available on the `tests/supportingResources` and the lifecycle is managed by the `Makefile` targets.
-
-Resources on the `tests/supportingResources` folder are not intended for demo or actual implementation purposes, and can be used for reference.
-
-### Makefile
-The makefile contain in this repo is optimized for linux paths and the main purpose is to execute testing for now.
-* Create all tests stacks including any supporting resources:
-```console
-make tests
-```
-* Clean all tests *except* existing supporting resources:
-```console
-make clean
-```
-* Clean supporting resources - this is done separately so you can test your module build/modify/destroy independently.
-```console
-make cleansupporting
-```
-* !!!DANGER!!! Clean the state files from examples and test/supportingResources - use with CAUTION!!!
-```console
-make cleanstatefiles
-```
 
 <h2> BOLDLink-SIG 2025 </h2>
