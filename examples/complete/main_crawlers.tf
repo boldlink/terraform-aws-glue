@@ -38,7 +38,7 @@ module "crawler" {
   classifiers           = ["${var.name}-ireland"]
   tags                  = { Environment = "example" }
   depends_on            = [
-    module.catalogs_ireland, 
+    module.catalog_ireland_1, 
     module.ireland_s3_bucket, 
     module.role_ireland, 
     time_sleep.wait_for_ireland 

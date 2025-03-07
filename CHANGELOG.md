@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - feat: add the Glue Catalog  source.
 - feat: add the JDBC table source.
 - feat: add the DDB table source.
+- feat: add the federated db and connection to complete catalog database example.
+- feat: add the Glue Catalog table datalake permissions to complete catalog database example.
+- feat: add remaining outputs to global module.
 - fix: CKV_AWS_94 # Ensure that encryption is enabled for the AWS Glue Data Catalog
 - fix: CKV_AWS_99 # Ensure Glue Security Configuration Encryption is enabled
 - fix: CKV_AWS_108 # "Ensure IAM policies does not allow data exfiltration"

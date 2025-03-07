@@ -1,11 +1,7 @@
 module "catalog" {
-  source = "./../../modules/catalog"
-  catalogs = {
-    "${var.name}" = {
-      name        = var.name
-      description = "${var.name} catalog"
-    }
-  }
+  source      = "./../../modules/catalog_database"
+  name        = var.name
+  description = "${var.name} catalog"
 }
 
 module "role" {
