@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix: CKV_AWS_356 # "Ensure no IAM policies documents allow "*" as a statement's resource for restrictable actions"
 - fix: CKV_AWS_195 # "Ensure Glue component has a security configuration associated"
 
-## [1.0.0] - 2025-02-17
+## [1.0.0] - 2025-03-07
 ### Description
 - feat: adding the catalog module with support for the region specific encryption settings and resource policy.
 - feat: adding the crawler module with support for the s3_target.

@@ -1,10 +1,12 @@
 module "catalog" {
+  # checkov:skip=CKV_TF_1
   source      = "./../../modules/catalog_database"
   name        = var.name
   description = "${var.name} catalog"
 }
 
 module "role" {
+  # checkov:skip=CKV_TF_1
   source             = "boldlink/iam-role/aws"
   version            = "2.0.0"
   name               = "${var.name}-minimal"
@@ -15,7 +17,6 @@ module "role" {
     }
   }
 }
-
 
 resource "time_sleep" "wait_for_role" {
   create_duration = "30s"

@@ -133,11 +133,6 @@ module "crawler" {
 
 /*
 London catalog  configurations
-
-This example will test the global catalog encryption configurations.
-In this example we are configuring encryption and resource policy for the catalog.
-
-Multiple Catalogs are created.
 */
 
 module "glue_global_settings_london" {

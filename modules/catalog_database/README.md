@@ -27,16 +27,8 @@ Examples available [`here`](github.com/boldlink/terraform-aws-glue/tree/main/exa
 module "miniumum" {
   source  = "boldlink/glue/aws//modules/catalog"
   version = "x.x.x"
-  catalogs = {
-    catalog_example = {
-      name = "catalog_example"
-      description = "catalog example "
-      database_name = "catalog_example_db"
-      ...
-    }
-    ...
-  }
-  ...
+  name        = "example"
+  description = "example catalog"
 }
 ```
 ## Documentation
@@ -102,4 +94,4 @@ This repository uses third party software:
   * Install with `brew install tflint`
   * Manually use via pre-commit
 
-#### BOLDLink-SIG 2022
+<h2> BOLDLink-SIG 2025 </h2>
